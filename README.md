@@ -22,10 +22,26 @@ The application's source code is managed using a version control system (e.g., G
 The source code repository includes a clear commit history and follows best practices for version control.
 
 ## Starting Point
-Define the requirements and constraints of the project, including the input and output data, 
-the tools and technologies to be used, and any time or budget constraints.
+STEP 1. Use local JavaScript application to read and write JSON files.
+ Use FS module.
 
-Identify the data fields that need to be modified and determine 
-how they will be represented in the local JavaScript application.
+STEP 2. Load the initial JSON file and display the data to user.
+Use React Framework.
 
-Choose a storage mechanism that can store the modified data, such as a database or a local file system.
+STEP 3. Allow users to modify the data and sve changes. Use event listener
+to detect changes. Use fs module to write changes back to JSON file.
+
+ STEP 4. Store the modified data in a separate JSON file.
+   Use a similar naming convention.
+
+
+ STEP 5.Track the differences between the original and modified JSON files.
+   Use deep-diff to compare the two files and highlight the differences.
+
+ STEP 6. After restarting application, load the modified data from the
+ modified JSON.
+
+ STEP 7. Provide a clear and user-friendly interface for the user to
+ view the differences between the original and modified JSON files.
+   Use an UI framework to build the interface.
+   Highlight the difference using colors or other visual cues.

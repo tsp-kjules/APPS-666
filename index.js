@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require("fs");
 
 // fs.readFile('hell_property_data.json', 'utf8', (err, data) => {
 //     if (err) {
@@ -8,25 +8,24 @@ const fs = require('fs');
 //     console.log(data);
 // });
 
-const originalPath = 'hell_property_data.json'
-const modifiedPath = 'hell_property_modified.json'
-
+const originalPath = "hell_property_data.json";
+const modifiedPath = "modified_property_data.json";
 
 // Gets properties using either originalPath or modifiedPath
-const getProperties = url => {
-    const jsonData = fs.readFileSync(url);
-    return JSON.parse(jsonData);
-}
+const getProperties = (url) => {
+  const jsonData = fs.readFileSync(url);
+  return JSON.parse(jsonData);
+};
 
 // Update json data
 const newData = getProperties(originalPath);
-newData[0].owner = 'Tom Almighty'
+newData[0].owner = "Tom Almighty";
 
 // Write to modified data.
 fs.writeFile(modifiedPath, JSON.stringify(newData), (err) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    console.log('Data written to file.')
-})
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log("Data written to file.");
+});

@@ -34,25 +34,27 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/">
-            <PropertyList properties={originalData} />
-          </Route>
-          <Route exact path="/add">
-            <PropertyForm addProperty={addProperty} />
-          </Route>
-          <Route exact path="/edit/:id">
-            <PropertyForm
-              updateProperty={updateProperty}
-              originalData={originalData}
-              modifiedData={modifiedData}
-            />
-          </Route>
-          <Route exact path="/compare">
-            <CompareData
-              originalData={originalData}
-              modifiedData={modifiedData}
-            />
-          </Route>
+          <Route
+            path="/"
+            element={<PropertyList properties={originalData} />}
+          />
+          <Route
+            path="/add"
+            element={<PropertyForm addProperty={addProperty} />}
+          />
+          <Route
+            path="/edit/:id"
+            element={<PropertyForm updateProperty={updateProperty} />}
+          />
+          <Route
+            path="/compare"
+            element={
+              <CompareData
+                originalData={originalData}
+                modifiedData={modifiedData}
+              />
+            }
+          />
         </Routes>
       </Router>
     </div>

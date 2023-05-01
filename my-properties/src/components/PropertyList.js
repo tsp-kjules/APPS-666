@@ -1,26 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-const PropertyList = ({ properties }) => {
+const PropertyList = () => {
+  const [properties, setProperties] = useState([]);
+
+  useEffect(() => {
+    fetch("./data/hell_property_data.json")
+      .then((response) => response.json())
+      .then((data) => setProperties(data))
+  }, []);
+
   return (
     <div>
-      <h1>Original Property List</h1>
-      <ul>
-        {properties.map((property) => (
-          // <li key={property.id}>
-          //   <Link to={`/edit/${property.id}`}>
-          //     {property.address}, {property.owner}
-          //   </Link>
-          // </li>
-          <tr key={property.id}>
-            <td>{property.address}</td>
-            <td>{property.owner}</td>
-            <td>{property.type}</td>
-            <td>{property.roofType}</td>
-            <td>{property.roofAngle}</td>
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Address</th>
+            <th>Owner</th>
+            <th>Type</th>
+            <th>Roof Type</th>
+            <th>Roof Angle</th>
           </tr>
-        ))}
-      </ul>
+        </thead>
+        <tbody>
+          {properties.map((property) => (
+            <tr key={property.id}>
+              <td>{property.id}</td>
+              <td>{property.address}</td>
+              <td>{property.owner}</td>
+              <td>{property.type}</td>
+              <td>{property.roofType}</td>
+              <td>{property.roofAngle}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

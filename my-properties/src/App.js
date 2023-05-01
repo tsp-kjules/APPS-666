@@ -1,30 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 import PropertyList from "./components/PropertyList";
 import PropertyForm from "./components/PropertyForm";
-import CompareData from "./components/CompareData";
 
 function App() {
-  const [originalData, setOriginalData] = useState([]);
-  const [modifiedData, setModifiedData] = useState([]);
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    fetch("/data/hell_property_data.json")
+    fetch("./data/hell_property_data.json")
       .then((response) => response.json())
-      .then((data) => setOriginalData(data));
-    fetch("/data/modified_property_data.json")
-      .then((response) => response.json())
-      .then((data) => setModifiedData(data));
+      .then((data) => setProperties(data));
   }, []);
 
   const addProperty = (property) => {
-    setModifiedData([...modifiedData, property]);
+    setProperties([...properties, property]);
   };
 
   const updateProperty = (updatedProperty) => {
-    setModifiedData(
-      modifiedData.map((property) =>
+    setProperties(
+      properties.map((property) =>
         property.id === updatedProperty.id ? updatedProperty : property
       )
     );
@@ -33,28 +28,25 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/add">Add Property</Link>
+            </li>
+          </ul>
+        </nav>
         <Routes>
-          <Route
-            path="/"
-            element={<PropertyList properties={originalData} />}
-          />
-          <Route
-            path="/add"
-            element={<PropertyForm addProperty={addProperty} />}
-          />
-          <Route
-            path="/edit/:id"
-            element={<PropertyForm updateProperty={updateProperty} />}
-          />
-          <Route
-            path="/compare"
-            element={
-              <CompareData
-                originalData={originalData}
-                modifiedData={modifiedData}
-              />
-            }
-          />
+          <Route exact path="/" element={<PropertyList properties={properties}/>} />
+            {/* <PropertyList properties={properties} /> */}
+          {/* <Route path="/add">
+            <PropertyForm addProperty={addProperty} />
+          </Route>
+          <Route path="/edit/:id">
+            <PropertyForm updateProperty={updateProperty} />
+          </Route> */}
         </Routes>
       </Router>
     </div>

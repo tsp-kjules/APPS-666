@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
-const PropertyForm = ({ addProperty, updateProperty }) => {
+const PropertyForm = ({ addProperty, updateProperty, originalData, modifiedData }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [property, setProperty] = useState({
-    id: "",
-    address: "",
-    owner: "",
-    type: "",
-    roofType: "",
-    roofAngle: "",
+    id: '',
+    address: '',
+    owner: '',
+    type: '',
+    roofType: '',
+    roofAngle: '',
   });
 
   useEffect(() => {
     if (id) {
-      fetch(`/data/hell_property_data.json`)
-        .then((res) => res.json())
-        .then((data) => {
-          const currentProperty = data.find((property) => property.id === id);
-          setProperty(currentProperty);
-        });
+      const currentProperty = modifiedData.find(
+        (property) => property.id === id
+      );
+      setProperty(currentProperty);
     }
-  }, [id]);
+  }, [id, modifiedData]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,7 +31,7 @@ const PropertyForm = ({ addProperty, updateProperty }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!property.address || !property.owner) {
-      alert("Please provide both an address and owner name.");
+      alert('Please provide both an address and owner name.');
       return;
     }
     if (!property.id) {
@@ -41,59 +39,64 @@ const PropertyForm = ({ addProperty, updateProperty }) => {
     } else {
       updateProperty(property);
     }
-    navigate("/");
+    navigate('/');
   };
 
   return (
     <div>
-      <h1>{id ? "Edit" : "Add"} Property</h1>
+      <h1>{id ? 'Edit' : 'Add'} Property</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="address">Address</label>
+          <label htmlFor='address'>Address</label>
           <input
-            type="text"
-            name="address"
+            type='text'
+            id='address'
+            name='address'
             value={property.address}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label htmlFor="owner">Owner</label>
+          <label htmlFor='owner'>Owner</label>
           <input
-            type="text"
-            name="owner"
+            type='text'
+            id='owner'
+            name='owner'
             value={property.owner}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label htmlFor="type">Type</label>
+          <label htmlFor='type'>Type</label>
           <input
-            type="text"
-            name="type"
+            type='text'
+            id='type'
+            name='type'
             value={property.type}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label htmlFor="roofType">Roof Type</label>
+          <label htmlFor='roofType'>Roof Type</label>
           <input
-            type="text"
-            name="roofType"
+            type='text'
+            id='roofType'
+            name='roofType'
             value={property.roofType}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label htmlFor="roofAngle">Roof Angle</label>
+          <label htmlFor='roofAngle'>Roof Angle</label>
           <input
-            type="number"
-            name="roofAngle"
+            type='text'
+            id='roofAngle'
+            name='roofAngle'
             value={property.roofAngle}
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">{id ? "Update" : "Add"} Property</button>
+        <button type='submit'>{id ? 'Update' : 'Add'}</button>
       </form>
     </div>
   );

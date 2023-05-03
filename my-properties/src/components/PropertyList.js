@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import data from "../data/hell_property_data.json"
 
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    fetch("./data/hell_property_data.json")
-      .then((response) => response.json())
-      .then((data) => setProperties(data))
+    setProperties(data)
+    // fetch("./data/hell_property_data.json")
+    //   .then((response) => response.json())
+    //   .then((data) => setProperties(data))
   }, []);
 
   return (

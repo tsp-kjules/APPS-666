@@ -1,47 +1,70 @@
+# Getting Started with Create React App
 
-# APPS-901
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Story
-As a user, I want to be able to modify data in a provided JSON file through a local JavaScript application, 
-store the changes, and track the differences between the initial JSON file and the modified version.
+## Available Scripts
 
-The application should allow me to make changes to the data, save those changes, 
-and render the modified data upon restarting the application. Changes in the data should be easily identifiable.
+In the project directory, you can run:
 
-## Conditions of Satisfaction
-The user can view and modify data from the provided JSON file within the local JavaScript application.
+### `npm start`
 
-The user can save modified data, and the data should be retrievable from a storage mechanism after the application is restarted.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-Upon restarting the application, the modified data is retrieved and displayed, instead of the original JSON data (if changes are present).
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-The application highlights or identifies the differences between the initial JSON file and the modified version.
+### `npm test`
 
-The application's source code is managed using a version control system (e.g., Git).
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-The source code repository includes a clear commit history and follows best practices for version control.
+### `npm run build`
 
-## Starting Point
-STEP 1. Use local JavaScript application to read and write JSON files.
- Use FS module.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-STEP 2. Load the initial JSON file and display the data to user.
-Use React Framework.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-STEP 3. Allow users to modify the data and sve changes. Use event listener
-to detect changes. Use fs module to write changes back to JSON file.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
- STEP 4. Store the modified data in a separate JSON file.
-   Use a similar naming convention.
+### `npm run eject`
 
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
- STEP 5.Track the differences between the original and modified JSON files.
-   Use deep-diff to compare the two files and highlight the differences.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
- STEP 6. After restarting application, load the modified data from the
- modified JSON.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
- STEP 7. Provide a clear and user-friendly interface for the user to
- view the differences between the original and modified JSON files.
-   Use an UI framework to build the interface.
-   Highlight the difference using colors or other visual cues.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

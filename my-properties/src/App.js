@@ -13,35 +13,48 @@ function App() {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    setProperties(data);
+    // Get the localstorage from properties
+    const storedProperties = localStorage.getItem('properties');
+    if (storedProperties) {
+      const parsedProperties = JSON.parse(storedProperties);
+      if (Array.isArray(parsedProperties)) {
+        setProperties(JSON.parse(storedProperties));
+      } else {
+        setProperties(data);
+      }
+    } else {
+      setProperties(data);
+    }
   }, []);
 
   const updateProperty = (updatedProperty) => {
-    setProperties(
-      properties.map((property) =>
-        property.id === updatedProperty.id
-          ? updatedProperty
-          : property,
-      ),
+    const updatedProperties = properties.map((property) =>
+      property.id === updatedProperty.id ? updatedProperty : property,
     );
+    setProperties(updatedProperties);
+    localStorage.setItem(
+      'properties',
+      JSON.stringify(updatedProperties),
+    );
+  };
+
+  const resetProperties = () => {
+    setProperties(data);
+    localStorage.setItem('properties', JSON.stringify(data));
   };
 
   return (
     <div className="App">
       <Router>
         <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-          </ul>
+          <Link to="/">Home</Link>
         </nav>
         <Routes>
-          <Route
+          {/* <Route
             exact
             path="/"
             element={<PropertyList properties={properties} />}
-          />
+          /> */}
           <Route
             path="/edit/:id"
             element={
@@ -51,8 +64,14 @@ function App() {
               />
             }
           />
+          <Route
+            exact
+            path="/"
+            element={<PropertyList modifiedProperties={properties} />}
+          />
         </Routes>
       </Router>
+      <button onClick={resetProperties}>Reset</button>
     </div>
   );
 }

@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from "react";
-import data from "../data/hell_property_data.json"
+import React, { useState, useEffect } from 'react';
+import data from '../data/hell_property_data.json';
 
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    setProperties(data)
+    setProperties(data);
     // fetch("./data/hell_property_data.json")
     //   .then((response) => response.json())
     //   .then((data) => setProperties(data))
   }, []);
+
+  // Create a textAlign of center variable
+  const cellStyle = {
+    textAlign: 'center',
+  };
 
   return (
     <div>
@@ -28,12 +33,12 @@ const PropertyList = () => {
         <tbody>
           {properties.map((property) => (
             <tr key={property.id}>
-              <td>{property.id}</td>
-              <td>{property.address}</td>
-              <td>{property.owner}</td>
-              <td>{property.type}</td>
-              <td>{property.roofType}</td>
-              <td>{property.roofAngle}</td>
+              <td style={cellStyle}>{property.id}</td>
+              <td style={cellStyle}>{property.address}</td>
+              <td style={cellStyle}>{property.owner}</td>
+              <td style={cellStyle}>{property.type}</td>
+              <td style={cellStyle}>{property.roofType}</td>
+              <td style={cellStyle}>{property.roofAngle}</td>
             </tr>
           ))}
         </tbody>

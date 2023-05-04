@@ -2,28 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-const PropertyForm = ({ addProperty, updateProperty, originalData, modifiedData }) => {
+const PropertyForm = ({ properties, updateProperty }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [property, setProperty] = useState({
-    id: '',
-    address: '',
-    owner: '',
-    type: '',
-    roofType: '',
-    roofAngle: '',
-  });
+  const [property, setProperty] = useState(null);
 
   useEffect(() => {
-    if (id) {
-      const currentProperty = modifiedData.find(
-        (property) => property.id === id
-      );
-      setProperty(currentProperty);
+    const propertyToEdit = properties.find(
+      (property) => property.id === parseInt(id),
+    );
+    if (propertyToEdit) {
+      setProperty({ ...propertyToEdit });
     }
-  }, [id, modifiedData]);
+  }, [id, properties]);
 
-  const handleInputChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setProperty({ ...property, [name]: value });
   };
@@ -34,71 +27,73 @@ const PropertyForm = ({ addProperty, updateProperty, originalData, modifiedData 
       alert('Please provide both an address and owner name.');
       return;
     }
-    if (!property.id) {
-      addProperty({ ...property, id: uuidv4() });
-    } else {
+    if (property) {
       updateProperty(property);
+      navigate('/');
     }
-    navigate('/');
   };
 
+  if (!property) return <div>Loading...</div>;
+
   return (
-    <div>
-      <h1>{id ? 'Edit' : 'Add'} Property</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='address'>Address</label>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>
+          Address:
           <input
-            type='text'
-            id='address'
-            name='address'
+            type="text"
+            name="address"
             value={property.address}
-            onChange={handleInputChange}
+            onChange={handleChange}
           />
-        </div>
-        <div>
-          <label htmlFor='owner'>Owner</label>
+        </label>
+      </div>
+      <div>
+        <label>
+          Owner:
           <input
-            type='text'
-            id='owner'
-            name='owner'
+            type="text"
+            name="owner"
             value={property.owner}
-            onChange={handleInputChange}
+            onChange={handleChange}
           />
-        </div>
-        <div>
-          <label htmlFor='type'>Type</label>
+        </label>
+      </div>
+      <div>
+        <label>
+          Type:
           <input
-            type='text'
-            id='type'
-            name='type'
+            type="text"
+            name="type"
             value={property.type}
-            onChange={handleInputChange}
+            onChange={handleChange}
           />
-        </div>
-        <div>
-          <label htmlFor='roofType'>Roof Type</label>
+        </label>
+      </div>
+      <div>
+        <label>
+          Roof Type:
           <input
-            type='text'
-            id='roofType'
-            name='roofType'
+            type="text"
+            name="roofType"
             value={property.roofType}
-            onChange={handleInputChange}
+            onChange={handleChange}
           />
-        </div>
-        <div>
-          <label htmlFor='roofAngle'>Roof Angle</label>
+        </label>
+      </div>
+      <div>
+        <label>
+          Roof Angle:
           <input
-            type='text'
-            id='roofAngle'
-            name='roofAngle'
+            type="number"
+            name="roofAngle"
             value={property.roofAngle}
-            onChange={handleInputChange}
+            onChange={handleChange}
           />
-        </div>
-        <button type='submit'>{id ? 'Update' : 'Add'}</button>
-      </form>
-    </div>
+        </label>
+      </div>
+      <button type="submit">Save Changes</button>
+    </form>
   );
 };
 

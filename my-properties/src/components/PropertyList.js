@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import data from '../data/hell_property_data.json';
 
 const PropertyList = () => {
@@ -39,6 +40,11 @@ const PropertyList = () => {
               <td style={cellStyle}>{property.type}</td>
               <td style={cellStyle}>{property.roofType}</td>
               <td style={cellStyle}>{property.roofAngle}</td>
+              <td>
+                <Link to={`/edit/${property.id}`}>
+                  <button>Edit</button>
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

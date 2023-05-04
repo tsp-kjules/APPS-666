@@ -5,7 +5,7 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
-
+import data from './data/hell_property_data.json';
 import PropertyList from './components/PropertyList';
 import PropertyForm from './components/PropertyForm';
 
@@ -13,14 +13,8 @@ function App() {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    fetch('./data/hell_property_data.json')
-      .then((response) => response.json())
-      .then((data) => setProperties(data));
+    setProperties(data);
   }, []);
-
-  // const addProperty = (property) => {
-  //   setProperties([...properties, property]);
-  // };
 
   const updateProperty = (updatedProperty) => {
     setProperties(
@@ -48,12 +42,14 @@ function App() {
             path="/"
             element={<PropertyList properties={properties} />}
           />
-          {/* <Route path="/add">
-            <PropertyForm addProperty={addProperty} />
-          </Route> */}
           <Route
             path="/edit/:id"
-            element={<PropertyForm updateProperty={updateProperty} />}
+            element={
+              <PropertyForm
+                properties={properties}
+                updateProperty={updateProperty}
+              />
+            }
           />
         </Routes>
       </Router>
